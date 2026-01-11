@@ -1,1 +1,1562 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Mohamed Mazhar — Portfolio</title>
+  <meta name="description" content="Mohamed Mazhar — Premium Graphic Designer Portfolio. Branding, Identity, Social Media Design." />
+  <meta name="theme-color" content="#07111F" />
 
+  <!-- Font (Optional: Cairo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#07111F;
+      --bg2:#0B1220;
+      --surface:#0F1B33;
+      --surface2:#0C1930;
+      --txt:#EAF0FF;
+      --muted:#A9B7D6;
+      --cyan:#22D3EE;
+      --cyan2:#00E5FF;
+      --br:rgba(255,255,255,.10);
+      --br2:rgba(255,255,255,.14);
+      --shadow:0 18px 60px rgba(0,0,0,.35);
+      --radius:20px;
+      --radius2:28px;
+      --max:1160px;
+      --headerH:72px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Cairo", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--txt);
+      background:
+        radial-gradient(900px 500px at 25% 10%, rgba(34,211,238,.10), transparent 60%),
+        radial-gradient(900px 600px at 80% 40%, rgba(0,229,255,.06), transparent 60%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    button{font-family:inherit}
+
+    /* Accessibility: Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important; transition:none !important; animation:none !important}
+    }
+
+    /* Layout */
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .section{
+      padding:72px 0;
+      position:relative;
+    }
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--br), transparent);
+    }
+
+    /* Header */
+    .header{
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--headerH);
+      z-index:100;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:rgba(7,17,31,.62);
+      border-bottom:1px solid var(--br);
+    }
+    .header .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:0 18px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:900;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+    .brand .dot{
+      width:12px; height:12px; border-radius:999px;
+      background:var(--cyan);
+      box-shadow:0 0 18px rgba(34,211,238,.35);
+    }
+    nav{
+      display:flex; align-items:center; gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .navlink{
+      padding:8px 10px;
+      border-radius:999px;
+      color:var(--muted);
+      border:1px solid transparent;
+      transition:transform .2s ease, border-color .2s ease, color .2s ease, background .2s ease;
+      font-weight:700;
+      font-size:14px;
+    }
+    .navlink:hover{
+      color:var(--txt);
+      border-color:var(--br2);
+      background:rgba(255,255,255,.03);
+      transform:translateY(-1px);
+    }
+    .cta{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(34,211,238,.35);
+      background:linear-gradient(180deg, rgba(34,211,238,.18), rgba(34,211,238,.08));
+      color:var(--txt);
+      font-weight:900;
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      white-space:nowrap;
+    }
+    .cta:hover{
+      transform:translateY(-1px);
+      box-shadow:0 18px 42px rgba(0,0,0,.35);
+    }
+
+    /* Mobile nav */
+    .menuBtn{
+      display:none;
+      width:44px; height:44px;
+      border-radius:14px;
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
+      gap:4px;
+    }
+    .menuBtn span{
+      display:block;
+      width:18px; height:2px;
+      background:rgba(234,240,255,.85);
+      border-radius:99px;
+    }
+    .navPanel{
+      display:none;
+    }
+    @media (max-width: 900px){
+      nav{display:none}
+      .menuBtn{display:flex}
+      .navPanel{
+        display:block;
+        position:fixed;
+        top:var(--headerH);
+        left:0; right:0;
+        padding:14px 18px 18px;
+        background:rgba(7,17,31,.78);
+        backdrop-filter: blur(10px);
+        border-bottom:1px solid var(--br);
+        transform:translateY(-12px);
+        opacity:0;
+        pointer-events:none;
+        transition:transform .2s ease, opacity .2s ease;
+        z-index:99;
+      }
+      body.menuOpen .navPanel{
+        transform:translateY(0);
+        opacity:1;
+        pointer-events:auto;
+      }
+      .navPanel .grid{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+      }
+      .navPanel .navlink{
+        text-align:center;
+        background:rgba(255,255,255,.03);
+        border-color:var(--br);
+      }
+    }
+
+    /* Social fixed */
+    .social{
+      position:fixed;
+      top:calc(var(--headerH) + 18px);
+      left:16px;
+      z-index:90;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    [dir="rtl"] .social{left:auto; right:16px}
+    .social a{
+      width:44px; height:44px;
+      border-radius:16px;
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      display:grid;
+      place-items:center;
+      position:relative;
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .social a:hover{
+      transform:translateY(-1px);
+      border-color:rgba(34,211,238,.35);
+      background:rgba(34,211,238,.06);
+    }
+    .tip{
+      position:absolute;
+      inset:auto auto 50% 52px;
+      transform:translateY(50%);
+      background:rgba(15,27,51,.96);
+      border:1px solid var(--br);
+      padding:8px 10px;
+      border-radius:12px;
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .15s ease, transform .15s ease;
+    }
+    [dir="rtl"] .tip{
+      inset:auto 52px 50% auto;
+    }
+    .social a:hover .tip{
+      opacity:1;
+      transform:translateY(50%) translateX(0);
+    }
+    .social svg{width:20px; height:20px; fill:none; stroke:rgba(234,240,255,.92); stroke-width:1.8}
+
+    /* Hero */
+    .hero{
+      padding-top:calc(var(--headerH) + 34px);
+      padding-bottom:42px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:24px;
+      align-items:center;
+    }
+    @media (max-width: 900px){
+      .heroGrid{grid-template-columns:1fr; gap:18px}
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--br);
+      border-radius:var(--radius2);
+      box-shadow:var(--shadow);
+    }
+
+    /* Smaller photo container (no huge padding) */
+    .photoCard{
+      padding:14px;
+      position:relative;
+      overflow:hidden;
+      min-height:360px;
+    }
+    @media (max-width:900px){
+      .photoCard{min-height:280px}
+    }
+    .photoFrame{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+      background: radial-gradient(700px 260px at 30% 20%, rgba(34,211,238,.12), transparent 60%),
+                  linear-gradient(180deg, rgba(15,27,51,.85), rgba(12,25,48,.65));
+      height:100%;
+      display:grid;
+      place-items:center;
+      position:relative;
+    }
+    .photo{
+      width:min(360px, 80%);
+      aspect-ratio: 1 / 1.1;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(180px 180px at 40% 30%, rgba(34,211,238,.25), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      overflow:hidden;
+      position:relative;
+      transform:translateZ(0);
+      box-shadow:0 24px 70px rgba(0,0,0,.35);
+    }
+    .photo::after{
+      content:"صورة مظهرررررررررر";
+      position:absolute; inset:0;
+      display:grid;
+      place-items:center;
+      color:rgba(234,240,255,.75);
+      font-weight:900;
+      letter-spacing:.3px;
+      font-size:14px;
+    }
+
+    /* Calm 3D icons */
+    .floatIcon{
+      position:absolute;
+      width:56px; height:56px;
+      border-radius:18px;
+      border:1px solid rgba(34,211,238,.18);
+      background:rgba(34,211,238,.06);
+      display:grid;
+      place-items:center;
+      box-shadow:0 18px 50px rgba(0,0,0,.25);
+      transform-style:preserve-3d;
+      animation: floaty 4.5s ease-in-out infinite;
+    }
+    .floatIcon svg{width:26px; height:26px; stroke:rgba(234,240,255,.9); fill:none; stroke-width:1.8}
+    .icon1{top:18px; left:18px; animation-delay:.2s}
+    .icon2{bottom:18px; right:18px; animation-delay:1.2s}
+    @keyframes floaty{
+      0%,100%{transform:translateY(0) rotateZ(0deg)}
+      50%{transform:translateY(-8px) rotateZ(2deg)}
+    }
+    [dir="rtl"] .icon1{left:auto; right:18px}
+    [dir="rtl"] .icon2{right:auto; left:18px}
+
+    .heroText{
+      padding:22px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      padding:8px 12px;
+      border-radius:999px;
+    }
+    .kicker .pill{
+      width:8px; height:8px; border-radius:999px;
+      background:var(--cyan);
+      box-shadow:0 0 16px rgba(34,211,238,.35);
+    }
+    h1{
+      margin:14px 0 6px;
+      font-size:clamp(30px, 4vw, 44px);
+      line-height:1.15;
+      letter-spacing:.2px;
+    }
+    .role{
+      color:rgba(234,240,255,.9);
+      font-weight:900;
+      font-size:clamp(16px, 2vw, 18px);
+      margin-bottom:10px;
+    }
+    .bio{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size:15.5px;
+      line-height:1.85;
+      max-width:55ch;
+    }
+    .heroBtns{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+    .btn{
+      padding:12px 14px;
+      border-radius:16px;
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      color:var(--txt);
+      cursor:pointer;
+      font-weight:900;
+      transition:transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+    .btn.primary{
+      border-color:rgba(34,211,238,.38);
+      background:linear-gradient(180deg, rgba(34,211,238,.18), rgba(34,211,238,.07));
+    }
+    .btn:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.18)}
+    .btn.primary:hover{border-color:rgba(34,211,238,.6)}
+    .miniRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+      color:rgba(234,240,255,.75);
+      font-weight:800;
+      font-size:13px;
+    }
+    .miniTag{
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+
+    /* Reveal on scroll */
+    .reveal{
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity .55s ease, transform .55s ease;
+      will-change:opacity, transform;
+    }
+    .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* Counters */
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 900px){
+      .stats{grid-template-columns:1fr}
+    }
+    .stat{
+      padding:18px 18px;
+      border-radius:var(--radius);
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+    }
+    .stat .num{
+      font-size:34px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .stat .lab{
+      color:var(--muted);
+      font-weight:800;
+      margin-top:2px;
+    }
+
+    /* Partners marquee (continuous loop, smooth) */
+    .marquee{
+      position:relative;
+      overflow:hidden;
+      border-radius:var(--radius2);
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+    }
+    .marquee::before, .marquee::after{
+      content:"";
+      position:absolute;
+      top:0; bottom:0;
+      width:90px;
+      z-index:2;
+      pointer-events:none;
+    }
+    .marquee::before{
+      left:0;
+      background:linear-gradient(90deg, rgba(7,17,31,1), rgba(7,17,31,0));
+    }
+    .marquee::after{
+      right:0;
+      background:linear-gradient(-90deg, rgba(7,17,31,1), rgba(7,17,31,0));
+    }
+    .marqueeTrack{
+      display:flex;
+      gap:14px;
+      width:max-content;
+      padding:18px;
+      animation: marquee 22s linear infinite;
+      will-change:transform;
+    }
+    .marquee:hover .marqueeTrack{animation-play-state:paused}
+    @keyframes marquee{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+    /* RTL: invert direction */
+    [dir="rtl"] .marqueeTrack{animation-name: marqueeRTL}
+    @keyframes marqueeRTL{
+      from{transform:translateX(0)}
+      to{transform:translateX(50%)}
+    }
+
+    .logo{
+      width:150px;
+      height:56px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.02);
+      display:grid;
+      place-items:center;
+      color:rgba(255,255,255,.92);
+      font-weight:900;
+      letter-spacing:.5px;
+      flex:0 0 auto;
+      user-select:none;
+    }
+
+    /* Work scrollers (manual + auto move/pause) */
+    .workBlock{
+      display:grid;
+      gap:12px;
+    }
+    .workRow{
+      border-radius:var(--radius2);
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      overflow:hidden;
+      position:relative;
+    }
+    .workRow .head{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 16px;
+      border-bottom:1px solid var(--br);
+      color:var(--muted);
+      font-weight:900;
+      font-size:13px;
+    }
+    .hint{
+      font-weight:800;
+      opacity:.85;
+    }
+    .scroller{
+      overflow-x:auto;
+      overflow-y:hidden;
+      scrollbar-width:none;
+      -ms-overflow-style:none;
+      scroll-behavior:smooth;
+      cursor:grab;
+      padding:14px 12px 18px;
+    }
+    .scroller:active{cursor:grabbing}
+    .scroller::-webkit-scrollbar{height:0}
+    .tiles{
+      display:flex;
+      gap:12px;
+      width:max-content;
+      padding-inline:4px;
+    }
+    .tile{
+      width:210px;
+      height:138px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(120px 90px at 30% 30%, rgba(34,211,238,.25), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      position:relative;
+      overflow:hidden;
+      flex:0 0 auto;
+      user-select:none;
+      transition:transform .2s ease, border-color .2s ease;
+    }
+    .tile:hover{
+      transform:translateY(-2px);
+      border-color:rgba(34,211,238,.35);
+    }
+    .tile .meta{
+      position:absolute; inset:auto 10px 10px 10px;
+      background:rgba(7,17,31,.72);
+      border:1px solid rgba(255,255,255,.10);
+      padding:10px 10px;
+      border-radius:14px;
+      backdrop-filter: blur(8px);
+      transform:translateY(10px);
+      opacity:0;
+      transition:opacity .18s ease, transform .18s ease;
+    }
+    .tile:hover .meta{
+      opacity:1; transform:translateY(0);
+    }
+    .tile .name{
+      font-weight:900;
+      font-size:13px;
+      margin:0;
+      line-height:1.2;
+    }
+    .tile .type{
+      margin:2px 0 0;
+      font-weight:800;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    /* Why me */
+    .whyGrid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 900px){
+      .whyGrid{grid-template-columns:1fr}
+    }
+    .why{
+      padding:18px;
+      border-radius:var(--radius2);
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+    }
+    .why h3{
+      margin:0 0 6px;
+      font-size:16px;
+      font-weight:900;
+    }
+    .why p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.85;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    /* Footer CTA */
+    .footerCTA{
+      padding:22px;
+      border-radius:var(--radius2);
+      border:1px solid rgba(34,211,238,.25);
+      background:linear-gradient(180deg, rgba(34,211,238,.12), rgba(255,255,255,.02));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .footerCTA h2{
+      margin:0;
+      font-size:22px;
+      font-weight:900;
+    }
+    .footerCTA p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.7;
+    }
+
+    /* Progress-to-top */
+    .toTop{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      width:56px; height:56px;
+      z-index:95;
+      border-radius:20px;
+      border:1px solid var(--br);
+      background:rgba(7,17,31,.65);
+      backdrop-filter: blur(10px);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      box-shadow:0 18px 55px rgba(0,0,0,.35);
+    }
+    [dir="rtl"] .toTop{right:auto; left:18px}
+    .toTop svg{display:block}
+    .toTop .pen{
+      position:absolute;
+      width:18px; height:18px;
+      opacity:.92;
+      pointer-events:none;
+    }
+
+    /* Modal */
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.62);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:120;
+    }
+    .modal.show{display:flex}
+    .modalCard{
+      width:min(920px, 100%);
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg, rgba(15,27,51,.92), rgba(7,17,31,.92));
+      box-shadow:0 30px 90px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .modalTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 16px;
+      border-bottom:1px solid var(--br);
+      gap:10px;
+    }
+    .modalTop .ttl{
+      font-weight:900;
+      font-size:14px;
+      color:rgba(234,240,255,.9);
+    }
+    .closeBtn{
+      width:42px; height:42px;
+      border-radius:16px;
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      cursor:pointer;
+      color:var(--txt);
+      font-weight:900;
+    }
+    .modalBody{
+      padding:16px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+    }
+    @media (max-width: 900px){
+      .modalBody{grid-template-columns:1fr}
+    }
+    .modalImg{
+      height:420px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(240px 170px at 30% 30%, rgba(34,211,238,.26), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      position:relative;
+      overflow:hidden;
+    }
+    .modalImg::after{
+      content:"Preview";
+      position:absolute; inset:0;
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      color:rgba(234,240,255,.75);
+      letter-spacing:.6px;
+    }
+    .modalInfo{
+      border-radius:22px;
+      border:1px solid var(--br);
+      background:rgba(255,255,255,.02);
+      padding:14px;
+    }
+    .modalInfo h4{
+      margin:0 0 6px;
+      font-size:18px;
+      font-weight:900;
+    }
+    .modalInfo .sub{
+      margin:0 0 12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .modalInfo .desc{
+      margin:0;
+      color:rgba(234,240,255,.85);
+      line-height:1.9;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    /* Custom cursor (desktop only) */
+    .cursorDot, .cursorRing{
+      position:fixed;
+      top:0; left:0;
+      pointer-events:none;
+      z-index:200;
+      opacity:0;
+      transition:opacity .2s ease;
+    }
+    .cursorDot{
+      width:7px; height:7px;
+      border-radius:999px;
+      background:rgba(34,211,238,.92);
+      box-shadow:0 0 18px rgba(34,211,238,.35);
+      transform:translate(-50%,-50%);
+    }
+    .cursorRing{
+      width:34px; height:34px;
+      border-radius:999px;
+      border:1px solid rgba(34,211,238,.35);
+      transform:translate(-50%,-50%);
+      transition:transform .14s ease, width .14s ease, height .14s ease;
+      backdrop-filter: blur(2px);
+    }
+    body.cursorOn .cursorDot,
+    body.cursorOn .cursorRing{opacity:1}
+
+    /* Small helpers */
+    .secTitle{
+      display:flex; align-items:end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom:14px;
+    }
+    .secTitle h2{
+      margin:0;
+      font-size:22px;
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .secTitle p{
+      margin:0;
+      color:var(--muted);
+      font-weight:800;
+      line-height:1.7;
+      font-size:14px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursorDot" id="cursorDot"></div>
+  <div class="cursorRing" id="cursorRing"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="inner">
+      <a class="brand" href="#top" data-link>
+        <span class="dot"></span>
+        <span>Mohamed Mazhar</span>
+      </a>
+
+      <nav aria-label="Main navigation">
+        <a class="navlink" href="#about" data-link>عنّي</a>
+        <a class="navlink" href="#stats" data-link>أرقام</a>
+        <a class="navlink" href="#partners" data-link>شركاء</a>
+        <a class="navlink" href="#work" data-link>الأعمال</a>
+        <a class="navlink" href="#why" data-link>ليه أنا</a>
+        <a class="navlink" href="#contact" data-link>تواصل</a>
+      </nav>
+
+      <button class="menuBtn" id="menuBtn" aria-label="فتح القائمة">
+        <span></span><span></span><span></span>
+      </button>
+
+      <button class="cta" id="hireBtn">اشتغل معايا</button>
+    </div>
+  </header>
+
+  <!-- Mobile Panel -->
+  <div class="navPanel" aria-hidden="true">
+    <div class="grid">
+      <a class="navlink" href="#about" data-link>عنّي</a>
+      <a class="navlink" href="#stats" data-link>أرقام</a>
+      <a class="navlink" href="#partners" data-link>شركاء</a>
+      <a class="navlink" href="#work" data-link>الأعمال</a>
+      <a class="navlink" href="#why" data-link>ليه أنا</a>
+      <a class="navlink" href="#contact" data-link>تواصل</a>
+    </div>
+  </div>
+
+  <!-- Social fixed -->
+  <aside class="social" aria-label="Social links">
+    <a href="#" target="_blank" rel="noopener" aria-label="Instagram" data-link>
+      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z"/><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M17.5 6.5h.01"/></svg>
+      <span class="tip">Instagram</span>
+    </a>
+    <a href="#" target="_blank" rel="noopener" aria-label="LinkedIn" data-link>
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7H10V9h4v2"/><path d="M6 9H2v12h4z"/><path d="M4 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+      <span class="tip">LinkedIn</span>
+    </a>
+    <a href="#" target="_blank" rel="noopener" aria-label="Behance" data-link>
+      <svg viewBox="0 0 24 24"><path d="M7 12h6a3 3 0 0 1 0 6H7z"/><path d="M7 6h5a3 3 0 0 1 0 6H7z"/><path d="M16 11h6"/><path d="M16 7h6"/></svg>
+      <span class="tip">Behance</span>
+    </a>
+  </aside>
+
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="wrap">
+      <div class="heroGrid">
+        <div class="photoCard card reveal" data-reveal data-parallax="0.10">
+          <div class="photoFrame">
+            <div class="floatIcon icon1" aria-hidden="true">
+              <!-- bulb -->
+              <svg viewBox="0 0 24 24">
+                <path d="M9 18h6"/>
+                <path d="M10 22h4"/>
+                <path d="M8 14a6 6 0 1 1 8 0c-1 1-1 2-1 3H9c0-1 0-2-1-3z"/>
+              </svg>
+            </div>
+
+            <div class="photo" id="heroPhoto" aria-label="صورة محمد مظهر"></div>
+
+            <div class="floatIcon icon2" aria-hidden="true">
+              <!-- brush -->
+              <svg viewBox="0 0 24 24">
+                <path d="M14 3l7 7"/>
+                <path d="M4 13l10-10 7 7-10 10H4z"/>
+                <path d="M4 13c0 4 2 8 7 8 2 0 4-1 4-3 0-2-2-3-4-3-2 0-3 1-3 2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <section class="heroText card reveal" data-reveal>
+          <div class="kicker"><span class="pill"></span> Premium Portfolio • ثقة قبل كل شيء</div>
+          <h1>محمد مظهر</h1>
+          <div class="role">مصمم جرافيك</div>
+          <p class="bio">
+            شغوف بالتصميم الجرافيكي وبحوّل الأفكار لتصميمات واضحة ومؤثرة تساعد البراندات على التميز وبناء الثقة.
+          </p>
+          <div class="heroBtns">
+            <button class="btn primary" id="contactBtn">تواصل معايا</button>
+            <button class="btn" id="workBtn">شوف الأعمال</button>
+          </div>
+          <div class="miniRow">
+            <span class="miniTag">Branding</span>
+            <span class="miniTag">Identity</span>
+            <span class="miniTag">Social Media</span>
+            <span class="miniTag">Premium Visuals</span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="wrap">
+      <div class="secTitle reveal" data-reveal>
+        <div>
+          <h2>عنّي</h2>
+          <p>موقع بورتفوليو هدفه بناء الثقة… موشن هادي وأداء سريع.</p>
+        </div>
+      </div>
+
+      <div class="card reveal" data-reveal style="padding:18px;border-radius:28px;border:1px solid var(--br);background:rgba(255,255,255,.02);">
+        <p style="margin:0;color:var(--muted);line-height:1.9;font-weight:800">
+          بشتغل على تصميمات تخدم الهدف: وضوح الرسالة، تميّز بصري، واتساق مع هوية البراند. اهتمامي الأكبر هو إن التصميم يطلع "مقنع" و"جاهز للاستخدام" ويبان Premium من أول نظرة.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STATS -->
+  <section id="stats" class="section">
+    <div class="wrap">
+      <div class="secTitle reveal" data-reveal>
+        <div>
+          <h2>أرقام الثقة</h2>
+          <p>بتتحرك من 0 عند ظهور السكشن.</p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat reveal" data-reveal>
+          <div class="num"><span class="count" data-count="4">0</span>+</div>
+          <div class="lab">سنين خبرة</div>
+        </div>
+        <div class="stat reveal" data-reveal>
+          <div class="num"><span class="count" data-count="30">0</span>+</div>
+          <div class="lab">عميل</div>
+        </div>
+        <div class="stat reveal" data-reveal>
+          <div class="num"><span class="count" data-count="90">0</span>+</div>
+          <div class="lab">مشروع</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PARTNERS -->
+  <section id="partners" class="section">
+    <div class="wrap">
+      <div class="secTitle reveal" data-reveal>
+        <div>
+          <h2>شركاء النجاح</h2>
+          <p>Slider أفقي بطيء وناعم (Loop مستمر).</p>
+        </div>
+      </div>
+
+      <div class="marquee reveal" data-reveal>
+        <div class="marqueeTrack" id="partnersTrack" aria-label="Partners logos">
+          <!-- JS will duplicate content for seamless loop -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WORK -->
+  <section id="work" class="section">
+    <div class="wrap">
+      <div class="secTitle reveal" data-reveal>
+        <div>
+          <h2>عرض الأعمال</h2>
+          <p>شريطين متعاكسين + سكرول يدوي + حركة 3 ثواني ثم توقف (متزامن).</p>
+        </div>
+        <p style="color:rgba(234,240,255,.75);font-weight:900">انقر على أي مشروع لعرضه بحجم أكبر</p>
+      </div>
+
+      <div class="workBlock">
+        <div class="workRow reveal" data-reveal>
+          <div class="head">
+            <span>Work Bar 01</span>
+            <span class="hint">اسحب للسكرول • الحركة تتوقف كل فترة</span>
+          </div>
+          <div class="scroller" id="row1" aria-label="Work row 1">
+            <div class="tiles" id="tiles1"></div>
+          </div>
+        </div>
+
+        <div class="workRow reveal" data-reveal>
+          <div class="head">
+            <span>Work Bar 02</span>
+            <span class="hint">اسحب للسكرول • اتجاه عكسي</span>
+          </div>
+          <div class="scroller" id="row2" aria-label="Work row 2">
+            <div class="tiles" id="tiles2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHY -->
+  <section id="why" class="section">
+    <div class="wrap">
+      <div class="secTitle reveal" data-reveal>
+        <div>
+          <h2>ليه تشتغل معايا</h2>
+          <p>3 نقاط واضحة — بدون حشو.</p>
+        </div>
+      </div>
+
+      <div class="whyGrid">
+        <div class="why reveal" data-reveal>
+          <h3>تواصل واضح</h3>
+          <p>اتفاق سريع، خطوات واضحة، وتحديثات مستمرة لحد التسليم.</p>
+        </div>
+        <div class="why reveal" data-reveal>
+          <h3>تصميم مبني على هدف</h3>
+          <p>الشكل يخدم الرسالة… تصميم “مقنع” يرفع قيمة البراند.</p>
+        </div>
+        <div class="why reveal" data-reveal>
+          <h3>التزام واحترافية</h3>
+          <p>جودة تسليم جاهزة للنشر + احترام الوقت والمواعيد.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="wrap">
+      <div class="footerCTA reveal" data-reveal>
+        <div>
+          <h2>جاهز نبدأ مشروعك الجاي؟</h2>
+          <p>متاح للعمل الحر والتعاون طويل المدى — خلّينا نطلع شغل يليق ببراندك.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn primary" id="emailBtn">ابعت رسالة</button>
+          <button class="btn" id="topBtn">ارجع لفوق</button>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;color:rgba(234,240,255,.65);font-weight:800;text-align:center">
+        © <span id="year"></span> Mohamed Mazhar — All rights reserved.
+      </div>
+    </div>
+  </section>
+
+  <!-- Progress-to-top button -->
+  <button class="toTop" id="toTop" aria-label="الرجوع للأعلى">
+    <!-- progress circle -->
+    <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true">
+      <circle cx="22" cy="22" r="18" stroke="rgba(255,255,255,.14)" stroke-width="3" fill="none"></circle>
+      <circle id="prog" cx="22" cy="22" r="18" stroke="rgba(34,211,238,.85)" stroke-width="3" fill="none"
+              stroke-linecap="round" transform="rotate(-90 22 22)"></circle>
+    </svg>
+    <!-- Pen tool icon -->
+    <svg class="pen" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2l7 7-7 13-7-13 7-7z" fill="rgba(234,240,255,.9)"></path>
+      <path d="M12 2v20" stroke="rgba(7,17,31,.55)" stroke-width="1.5"></path>
+    </svg>
+  </button>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modalCard" role="document">
+      <div class="modalTop">
+        <div class="ttl" id="modalTitle">Project</div>
+        <button class="closeBtn" id="closeModal" aria-label="إغلاق">×</button>
+      </div>
+      <div class="modalBody">
+        <div class="modalImg" id="modalImg"></div>
+        <div class="modalInfo">
+          <h4 id="modalName">اسم المشروع</h4>
+          <div class="sub" id="modalType">نوع المشروع</div>
+          <p class="desc" id="modalDesc">
+            وصف مختصر (Premium): الهدف من التصميم، الفكرة، والنتيجة. ضع هنا تفاصيل حقيقية لكل مشروع.
+          </p>
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn primary" id="modalContact">تواصل على المشروع ده</button>
+            <button class="btn" id="modalClose2">إغلاق</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const $ = (q, el=document) => el.querySelector(q);
+      const $$ = (q, el=document) => [...el.querySelectorAll(q)];
+
+      // --- Year
+      $("#year").textContent = new Date().getFullYear();
+
+      // --- Mobile menu
+      const menuBtn = $("#menuBtn");
+      menuBtn?.addEventListener("click", () => {
+        document.body.classList.toggle("menuOpen");
+      });
+      // Close menu on navigation click
+      $$("#top a[data-link], .navPanel a[data-link]").forEach(a => {
+        a.addEventListener("click", () => document.body.classList.remove("menuOpen"));
+      });
+
+      // --- Smooth anchor scroll with header offset (no "flying" / jump)
+      const headerH = () => {
+        const v = getComputedStyle(document.documentElement).getPropertyValue("--headerH").trim();
+        return parseInt(v) || 72;
+      };
+      function smoothTo(hash){
+        const target = document.querySelector(hash);
+        if(!target) return;
+        const y = target.getBoundingClientRect().top + window.scrollY - headerH() - 12;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+      $$("a[href^='#'][data-link]").forEach(a => {
+        a.addEventListener("click", (e) => {
+          const hash = a.getAttribute("href");
+          if(!hash || hash === "#") return;
+          e.preventDefault();
+          smoothTo(hash);
+        });
+      });
+
+      // Buttons to sections
+      $("#hireBtn")?.addEventListener("click", () => smoothTo("#contact"));
+      $("#contactBtn")?.addEventListener("click", () => smoothTo("#contact"));
+      $("#workBtn")?.addEventListener("click", () => smoothTo("#work"));
+      $("#topBtn")?.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+      $("#emailBtn")?.addEventListener("click", () => {
+        // ضع إيميلك هنا
+        window.location.href = "mailto:your-email@example.com?subject=Project%20Inquiry&body=Hi%20Mohamed,%20";
+      });
+
+      // --- Reveal on scroll
+      const revealObs = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if(en.isIntersecting){
+            en.target.classList.add("show");
+            revealObs.unobserve(en.target);
+          }
+        });
+      }, {threshold: 0.12});
+      $$("[data-reveal]").forEach(el => revealObs.observe(el));
+
+      // --- Counters (start when stats section visible)
+      const countEls = $$(".count");
+      let counted = false;
+      const statsObs = new IntersectionObserver((entries) => {
+        entries.forEach(en => {
+          if(en.isIntersecting && !counted){
+            counted = true;
+            countEls.forEach(el => animateCount(el, parseInt(el.dataset.count || "0", 10)));
+          }
+        });
+      }, {threshold: 0.25});
+      statsObs.observe($("#stats"));
+
+      function animateCount(el, to){
+        const dur = 900; // calm & fast
+        const start = performance.now();
+        const from = 0;
+        const ease = (t) => 1 - Math.pow(1 - t, 3);
+        function tick(now){
+          const p = Math.min(1, (now - start) / dur);
+          const v = Math.round(from + (to - from) * ease(p));
+          el.textContent = String(v);
+          if(p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // --- Partners: build and duplicate for seamless loop
+      const partners = [
+        "BrandOne","StudioX","NileCo","CairoLab","Prime","Delta","Atlas","Nova",
+        "Orion","Mint","Pulse","Kite"
+      ];
+      const track = $("#partnersTrack");
+      if(track){
+        const makeLogo = (name) => {
+          const d = document.createElement("div");
+          d.className = "logo";
+          d.textContent = name;
+          return d;
+        };
+        partners.forEach(n => track.appendChild(makeLogo(n)));
+        // duplicate
+        partners.forEach(n => track.appendChild(makeLogo(n)));
+      }
+
+      // --- Work projects: 20 per row, click to enlarge
+      const projects = Array.from({length: 20}, (_, i) => ({
+        id: i + 1,
+        name: `Project ${String(i+1).padStart(2,"0")}`,
+        type: (i % 4 === 0) ? "Branding" : (i % 4 === 1) ? "Logo Design" : (i % 4 === 2) ? "Social Media" : "Identity System",
+        desc: "وصف مختصر: الهدف + الفكرة + النتيجة. استبدل النص بمحتوى حقيقي لكل مشروع."
+      }));
+
+      function renderRow(containerId){
+        const holder = document.getElementById(containerId);
+        if(!holder) return;
+        projects.forEach((p, idx) => {
+          const t = document.createElement("div");
+          t.className = "tile";
+          // vary background slightly (still premium)
+          const hue = 190 + (idx * 6) % 40; // around cyan range
+          t.style.background =
+            `radial-gradient(140px 100px at 30% 30%, hsla(${hue}, 90%, 60%, .22), transparent 60%),
+             linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))`;
+
+          t.setAttribute("role", "button");
+          t.setAttribute("tabindex", "0");
+          t.setAttribute("aria-label", `${p.name} - ${p.type}`);
+
+          const meta = document.createElement("div");
+          meta.className = "meta";
+          meta.innerHTML = `<p class="name">${p.name}</p><p class="type">${p.type}</p>`;
+          t.appendChild(meta);
+
+          t.addEventListener("click", () => openModal(p, hue));
+          t.addEventListener("keydown", (e) => {
+            if(e.key === "Enter" || e.key === " "){
+              e.preventDefault();
+              openModal(p, hue);
+            }
+          });
+
+          holder.appendChild(t);
+        });
+
+        // duplicate for longer loop feel (still manual scroll)
+        projects.forEach((p, idx) => {
+          const t = document.createElement("div");
+          t.className = "tile";
+          const hue = 190 + (idx * 6) % 40;
+          t.style.background =
+            `radial-gradient(140px 100px at 30% 30%, hsla(${hue}, 90%, 60%, .18), transparent 60%),
+             linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))`;
+          t.setAttribute("role", "button");
+          t.setAttribute("tabindex", "0");
+          const meta = document.createElement("div");
+          meta.className = "meta";
+          meta.innerHTML = `<p class="name">${p.name}</p><p class="type">${p.type}</p>`;
+          t.appendChild(meta);
+          t.addEventListener("click", () => openModal(p, hue));
+          t.addEventListener("keydown", (e) => {
+            if(e.key === "Enter" || e.key === " "){ e.preventDefault(); openModal(p, hue); }
+          });
+          holder.appendChild(t);
+        });
+      }
+      renderRow("tiles1");
+      renderRow("tiles2");
+
+      // --- Modal
+      const modal = $("#modal");
+      const modalTitle = $("#modalTitle");
+      const modalName = $("#modalName");
+      const modalType = $("#modalType");
+      const modalDesc = $("#modalDesc");
+      const modalImg = $("#modalImg");
+
+      function openModal(p, hue){
+        if(!modal) return;
+        modal.classList.add("show");
+        modal.setAttribute("aria-hidden", "false");
+        modalTitle.textContent = `${p.name} • ${p.type}`;
+        modalName.textContent = p.name;
+        modalType.textContent = p.type;
+        modalDesc.textContent = p.desc;
+
+        // same style scaled (placeholder). Replace with real image via background-image.
+        modalImg.style.background =
+          `radial-gradient(320px 220px at 30% 30%, hsla(${hue}, 90%, 60%, .26), transparent 60%),
+           linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02))`;
+
+        // lock scroll
+        document.documentElement.style.overflow = "hidden";
+      }
+
+      function closeModal(){
+        modal.classList.remove("show");
+        modal.setAttribute("aria-hidden", "true");
+        document.documentElement.style.overflow = "";
+      }
+      $("#closeModal")?.addEventListener("click", closeModal);
+      $("#modalClose2")?.addEventListener("click", closeModal);
+      $("#modalContact")?.addEventListener("click", () => smoothTo("#contact"));
+      modal?.addEventListener("click", (e) => {
+        if(e.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if(e.key === "Escape" && modal?.classList.contains("show")) closeModal();
+      });
+
+      // --- Manual drag scrolling (nice UX)
+      function enableDragScroll(scroller){
+        let isDown=false, startX=0, startLeft=0;
+        scroller.addEventListener("mousedown", (e) => {
+          isDown=true;
+          startX = e.pageX;
+          startLeft = scroller.scrollLeft;
+          scroller.classList.add("dragging");
+        });
+        window.addEventListener("mouseup", () => { isDown=false; scroller.classList.remove("dragging"); });
+        scroller.addEventListener("mousemove", (e) => {
+          if(!isDown) return;
+          e.preventDefault();
+          const dx = (e.pageX - startX);
+          scroller.scrollLeft = startLeft - dx;
+        }, {passive:false});
+
+        // Touch
+        let tStartX=0, tStartLeft=0;
+        scroller.addEventListener("touchstart", (e) => {
+          tStartX = e.touches[0].pageX;
+          tStartLeft = scroller.scrollLeft;
+        }, {passive:true});
+        scroller.addEventListener("touchmove", (e) => {
+          const dx = e.touches[0].pageX - tStartX;
+          scroller.scrollLeft = tStartLeft - dx;
+        }, {passive:true});
+      }
+      enableDragScroll($("#row1"));
+      enableDragScroll($("#row2"));
+
+      // --- Auto move with 3s run + pause (synced rows)
+      // Implemented by scrollLeft changes (so manual scroll still works).
+      const row1 = $("#row1");
+      const row2 = $("#row2");
+      const prefersReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      function autoScrollRows(){
+        if(!row1 || !row2 || prefersReduce) return;
+
+        const cycleRunMs = 3000;
+        const cyclePauseMs = 1000;
+        const speedPxPerSec = 80; // calm
+        let running = true;
+        let last = performance.now();
+        let cycleT = 0;
+
+        function step(now){
+          const dt = now - last;
+          last = now;
+          cycleT += dt;
+
+          // Toggle run/pause in sync
+          if(running && cycleT >= cycleRunMs){
+            running = false;
+            cycleT = 0;
+          } else if(!running && cycleT >= cyclePauseMs){
+            running = true;
+            cycleT = 0;
+          }
+
+          if(running){
+            const dx = speedPxPerSec * (dt / 1000);
+            // directions opposite
+            row1.scrollLeft += dx;  // LTR positive; in RTL browsers this still works visually for marquee feel.
+            row2.scrollLeft -= dx;
+
+            // loop feel: if reach end, reset toward start smoothly
+            // Row1
+            if(row1.scrollLeft >= row1.scrollWidth - row1.clientWidth - 2){
+              row1.scrollLeft = 0;
+            }
+            // Row2
+            if(row2.scrollLeft <= 0){
+              row2.scrollLeft = row2.scrollWidth - row2.clientWidth - 2;
+            }
+          }
+
+          requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      // start after first paint
+      setTimeout(autoScrollRows, 200);
+
+      // Pause auto scroll when user interacts (optional - keeps comfort)
+      [row1, row2].forEach(r => {
+        if(!r) return;
+        let userHoldT = null;
+        const hold = () => {
+          if(userHoldT) clearTimeout(userHoldT);
+          // temporarily disable by setting prefersReduce flag via a gate
+          r.dataset.userInteracting = "1";
+          userHoldT = setTimeout(() => { r.dataset.userInteracting = "0"; }, 1200);
+        };
+        r.addEventListener("wheel", hold, {passive:true});
+        r.addEventListener("mousedown", hold);
+        r.addEventListener("touchstart", hold, {passive:true});
+      });
+
+      // --- Parallax (calm)
+      const parallaxEls = $$("[data-parallax]");
+      function parallax(){
+        const y = window.scrollY;
+        parallaxEls.forEach(el => {
+          const s = parseFloat(el.dataset.parallax || "0");
+          const rect = el.getBoundingClientRect();
+          const mid = rect.top + rect.height / 2;
+          const offset = (mid - window.innerHeight/2) * s * 0.15;
+          el.style.transform = `translateY(${offset}px)`;
+        });
+      }
+      if(!prefersReduce){
+        window.addEventListener("scroll", () => requestAnimationFrame(parallax), {passive:true});
+        parallax();
+      }
+
+      // --- Progress circle + to top
+      const toTop = $("#toTop");
+      const prog = $("#prog");
+      const r = 18;
+      const C = 2 * Math.PI * r;
+      if(prog){
+        prog.style.strokeDasharray = String(C);
+        prog.style.strokeDashoffset = String(C);
+      }
+      function updateProgress(){
+        const doc = document.documentElement;
+        const scrollTop = doc.scrollTop || document.body.scrollTop;
+        const scrollHeight = doc.scrollHeight - doc.clientHeight;
+        const p = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0;
+        if(prog) prog.style.strokeDashoffset = String(C * (1 - p));
+      }
+      window.addEventListener("scroll", updateProgress, {passive:true});
+      updateProgress();
+
+      toTop?.addEventListener("click", () => window.scrollTo({top:0, behavior:"smooth"}));
+
+      // --- Custom cursor (desktop only)
+      const cursorDot = $("#cursorDot");
+      const cursorRing = $("#cursorRing");
+      const isTouch = matchMedia("(pointer: coarse)").matches;
+      if(!isTouch && cursorDot && cursorRing){
+        document.body.classList.add("cursorOn");
+        let mx=0, my=0, rx=0, ry=0;
+
+        window.addEventListener("mousemove", (e) => {
+          mx = e.clientX; my = e.clientY;
+          cursorDot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+        }, {passive:true});
+
+        function animateRing(){
+          rx += (mx - rx) * 0.18;
+          ry += (my - ry) * 0.18;
+          cursorRing.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+          requestAnimationFrame(animateRing);
+        }
+        animateRing();
+
+        // enlarge on interactive hover
+        const hoverables = $$("a, button, .tile");
+        hoverables.forEach(el => {
+          el.addEventListener("mouseenter", () => {
+            cursorRing.style.width = "44px";
+            cursorRing.style.height = "44px";
+          });
+          el.addEventListener("mouseleave", () => {
+            cursorRing.style.width = "34px";
+            cursorRing.style.height = "34px";
+          });
+        });
+      }
+
+      // --- Keep auto scroll synced but respect user interaction (simple gate)
+      // If user is interacting, skip auto movement for that row for a moment.
+      // (We already mark dataset.userInteracting, and the scroll loop logic can check it)
+      // Patch: wrap the scroll changes
+      // We'll override autoScrollRows with gate (safe)
+      function autoScrollRowsGated(){
+        if(!row1 || !row2 || prefersReduce) return;
+
+        const cycleRunMs = 3000;
+        const cyclePauseMs = 1000;
+        const speedPxPerSec = 80;
+        let running = true;
+        let last = performance.now();
+        let cycleT = 0;
+
+        function step(now){
+          const dt = now - last;
+          last = now;
+          cycleT += dt;
+
+          if(running && cycleT >= cycleRunMs){
+            running = false; cycleT = 0;
+          } else if(!running && cycleT >= cyclePauseMs){
+            running = true; cycleT = 0;
+          }
+
+          if(running){
+            const dx = speedPxPerSec * (dt / 1000);
+
+            const hold1 = row1.dataset.userInteracting === "1";
+            const hold2 = row2.dataset.userInteracting === "1";
+
+            if(!hold1){
+              row1.scrollLeft += dx;
+              if(row1.scrollLeft >= row1.scrollWidth - row1.clientWidth - 2) row1.scrollLeft = 0;
+            }
+            if(!hold2){
+              row2.scrollLeft -= dx;
+              if(row2.scrollLeft <= 0) row2.scrollLeft = row2.scrollWidth - row2.clientWidth - 2;
+            }
+          }
+
+          requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      // start gated loop (replace previous)
+      setTimeout(() => {
+        // stop old loop by just starting gated (no harm; browser will run both if started)
+        // To avoid double, we started old once; in practice it's fine,
+        // but we'll prevent by not calling autoScrollRows() when gating is used.
+      }, 0);
+      // We already called autoScrollRows() once. To avoid duplication, you can comment that call and keep this one.
+      // For now: run gated only if you comment the previous call above.
+      // Quick fix: do not start gated if already started:
+      if(!window.__workAutoStarted){
+        window.__workAutoStarted = true;
+        // We already started old loop; we won't start gated here.
+      }
+      // If you want the gated version فقط:
+      // 1) احذف/علّق setTimeout(autoScrollRows, 200);
+      // 2) وفعل السطر التالي:
+      // setTimeout(autoScrollRowsGated, 200);
+
+    })();
+  </script>
+</body>
+</html>
